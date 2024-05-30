@@ -1,0 +1,27 @@
+.user-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  
+  .user-card {
+    width: 300px;
+    margin: 10px;
+  }
+  
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: black; 
+  }
+  
+  .platform-select {
+    width: 150px;
+  }
+  
+  .account-details {
+    margin-top: 10px;
+  }
+  
