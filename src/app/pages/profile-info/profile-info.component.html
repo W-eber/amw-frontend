@@ -5,7 +5,7 @@
         <div class="profile-username">{{ profile?.username }}</div>
       </div>
       <div class="profile-bio">{{ profile?.bio }}</div>
-      <button mat-button class="add-account-btn">
+      <button mat-button class="add-account-btn" [routerLink]="['/edit', profile?.id]">
         <mat-icon>add</mat-icon>
         Add Account
       </button>

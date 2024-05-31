@@ -1,1 +1,27 @@
-<p>minecraft-form works!</p>
+<form [formGroup]="minecraftForm" (ngSubmit)="addAccount()">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Name Changes</mat-label>
+      <input matInput formControlName="nameChanges">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add Account</button>
+  </form>
+  
+  <div *ngFor="let account of accounts">
+    <h3>{{ account.username }}</h3>
+    <p>{{ account.nameChanges }} name changes</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Add Cape</mat-label>
+      <input matInput #capeInput>
+    </mat-form-field>
+    <button mat-icon-button (click)="addCape(account, capeInput.value)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <div *ngFor="let cape of capes[account.id]" class="cape">
+      <p>{{ cape.name }}</p>
+    </div>
+  </div>
+  

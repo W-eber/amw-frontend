@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../service/profile.service';
 import { YoutubeAccountService } from '../../service/youtubeaccount.service';
 import { MinecraftAccountService } from '../../service/minecraftaccount.service';
@@ -26,11 +26,12 @@ export class ProfileInfoComponent implements OnInit {
   capes: { [accountId: number]: Capes[] } = {};
   youtubeAccounts: YoutubeAccount[] = [];
   steamAccounts: SteamAccount[] = [];
-  items: { [accountId: number]: Items[] } = [];
+  items: { [accountId: number]: Items[] } = {};
   discordAccounts: DiscordAccount[] = [];
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private profileService: ProfileService,
     private youtubeAccountService: YoutubeAccountService,
     private minecraftAccountService: MinecraftAccountService,
@@ -77,5 +78,13 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   onTabChange(index: number): void {
+  }
+
+  addAccount(): void {
+    this.router.navigate(['/edit']);
+  }
+
+  editAccount(accountId: number): void {
+    this.router.navigate(['/edit', accountId]);
   }
 }

@@ -1,1 +1,19 @@
-<p>youtube-form works!</p>
+<form [formGroup]="youtubeForm" (ngSubmit)="addAccount()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Followers</mat-label>
+      <input matInput formControlName="followers" type="number">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="full-width">Add Account</button>
+  </form>
+  
+  <div *ngFor="let account of accounts" class="account-container">
+    <div class="account-header">
+      <h3>{{ account.username }}</h3>
+      <p>{{ account.followers }} followers</p>
+    </div>
+  </div>
+  

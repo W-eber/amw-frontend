@@ -1,1 +1,19 @@
-<p>discord-form works!</p>
+<form [formGroup]="discordForm" (ngSubmit)="addAccount()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Join Date</mat-label>
+      <input matInput formControlName="joinDate" type="date">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="full-width">Add Account</button>
+  </form>
+  
+  <div *ngFor="let account of accounts" class="account-container">
+    <div class="account-header">
+      <h3>{{ account.username }}</h3>
+      <p>Joined: {{ account.joinDate | date: 'dd.MM.yyyy' }}</p>
+    </div>
+  </div>
+  

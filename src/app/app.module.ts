@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './pages/nav-bar/nav-bar.component';
 
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -21,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { NoAccessComponent } from './pages/no-access/no-access.component';
 import { AppLoginComponent } from './components/app-login/app-login.component';
@@ -32,7 +32,11 @@ import { AppAuthService } from './service/app.auth.service';
 import { IsInRolesDirective } from './directives/is-in-roles.dir';
 import { HomeUsersComponent } from './pages/home-users/home-users.component';
 import { ProfileInfoComponent } from './pages/profile-info/profile-info.component';
-import { MatTabsModule } from '@angular/material/tabs';
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
+import { MinecraftFormComponent } from './pages/minecraft-form/minecraft-form.component';
+import { YoutubeFormComponent } from './pages/youtube-form/youtube-form.component';
+import { DiscordFormComponent } from './pages/discord-form/discord-form.component';
+import { SteamFormComponent } from './pages/steam-form/steam-form.component';
 
 export const authConfig: AuthConfig = {
   issuer: 'http://localhost:8080/realms/ILV',
@@ -61,7 +65,12 @@ export function storageFactory(): OAuthStorage {
     NoAccessComponent,
     AppLoginComponent,
     IsInRolesDirective,
-    ProfileInfoComponent
+    ProfileInfoComponent,
+    EditUserComponent,
+    MinecraftFormComponent,
+    YoutubeFormComponent,
+    DiscordFormComponent,
+    SteamFormComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +85,7 @@ export function storageFactory(): OAuthStorage {
         sendAccessToken: true
       }
     }),
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -108,6 +118,6 @@ export function storageFactory(): OAuthStorage {
 })
 export class AppModule {
   constructor(authService: AppAuthService) {
-    authService.initAuth().finally()
+    authService.initAuth().finally();
   }
 }

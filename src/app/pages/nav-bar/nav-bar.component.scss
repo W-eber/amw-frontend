@@ -1,33 +1,24 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .spacer {
-    flex: 1;
-  }
-  
-  .user-section {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-icon {
-    margin-right: 8px;
-    color: black;
-    background-color: black;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-  }
-  
-  .username {
-    margin-right: 8px;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+}

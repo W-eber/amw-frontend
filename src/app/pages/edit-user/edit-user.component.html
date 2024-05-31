@@ -1,0 +1,22 @@
+<div class="edit-user-container">
+    <h1>Account Hinzufügen</h1>
+    <mat-tab-group (selectedTabChange)="onPlatformChange($event.tab.textLabel)">
+      <mat-tab label="Minecraft">
+        <app-minecraft-form *ngIf="selectedPlatform === 'Minecraft'" [(account)]="minecraftAccount"></app-minecraft-form>
+      </mat-tab>
+      <mat-tab label="YouTube">
+        <app-youtube-form *ngIf="selectedPlatform === 'YouTube'" [(account)]="youtubeAccount"></app-youtube-form>
+      </mat-tab>
+      <mat-tab label="Discord">
+        <app-discord-form *ngIf="selectedPlatform === 'Discord'" [(account)]="discordAccount"></app-discord-form>
+      </mat-tab>
+      <mat-tab label="Steam">
+        <app-steam-form *ngIf="selectedPlatform === 'Steam'" [(account)]="steamAccount"></app-steam-form>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="buttons">
+      <button mat-raised-button color="warn" (click)="deleteAccount()">Delete</button>
+      <button mat-raised-button color="primary" (click)="saveAccount()">Save</button>
+    </div>
+  </div>
+  

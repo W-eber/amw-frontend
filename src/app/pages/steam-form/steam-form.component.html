@@ -1,1 +1,36 @@
-<p>steam-form works!</p>
+<form [formGroup]="steamForm" (ngSubmit)="addAccount()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Friend Code</mat-label>
+      <input matInput formControlName="friendCode">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="full-width">Add Account</button>
+  </form>
+  
+  <div *ngFor="let account of accounts" class="account-container">
+    <div class="account-header">
+      <h3>{{ account.username }}</h3>
+      <p>Friend Code: {{ account.friendCode }}</p>
+    </div>
+    <div class="item-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Add Item</mat-label>
+        <input matInput #itemName placeholder="Item Name">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Item Price</mat-label>
+        <input matInput #itemPrice placeholder="Item Price" type="number">
+      </mat-form-field>
+      <button mat-icon-button color="primary" (click)="addItem(account, itemName.value, itemPrice.value)">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let item of items[account.id]" class="item">
+      <p>{{ item.name }}</p>
+      <p class="price">${{ item.price }}</p>
+    </div>
+  </div>
+  

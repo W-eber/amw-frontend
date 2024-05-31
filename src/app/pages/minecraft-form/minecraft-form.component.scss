@@ -1,0 +1,28 @@
+mat-form-field {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  h3 {
+    margin-top: 20px;
+  }
+  
+  div[mat-form-field] {
+    display: flex;
+    align-items: center;
+  }
+  
+  mat-icon {
+    cursor: pointer;
+  }
+  
+  .cape {
+    border-top: 1px solid #ddd;
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+  
