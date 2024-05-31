@@ -1,27 +1,53 @@
 .user-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 10px;
-  }
-  
-  .user-card {
-    width: 300px;
-    margin: 10px;
-  }
-  
-  .profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: black; 
-  }
-  
-  .platform-select {
-    width: 150px;
-  }
-  
-  .account-details {
-    margin-top: 10px;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.user-card {
+  width: 280px;
+  margin: 10px;
+  max-height: 555px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.platform-select {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.profile-info {
+  margin-top: 5px;
+}
+
+.join-date {
+  color: #888;
+}
+
+.youtube-accounts {
+  margin-top: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.youtube-account {
+  border: 1px solid #ccc;
+  padding: 5px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.followers {
+  color: #888;
+}

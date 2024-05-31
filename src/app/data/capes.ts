@@ -1,7 +1,7 @@
 import { MinecraftAccount } from "./minecraftaccount";
 
 export class Capes {
-    public id! : number
+    public id: number = 0;
     public name : string = ''
-    public minecraftaccount: MinecraftAccount["id"] = 0; 
+    public minecraftaccount: MinecraftAccount = new MinecraftAccount();  
   }

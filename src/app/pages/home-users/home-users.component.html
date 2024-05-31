@@ -1,30 +1,29 @@
 <div class="user-cards-container">
-    <mat-card class="user-card">
-      <mat-card-header>
-        <div mat-card-avatar class="profile-pic"></div>
-        <mat-card-title>username</mat-card-title>
-        <mat-card-subtitle>
-          <mat-form-field appearance="fill" class="platform-select">
-            <mat-label>Platform</mat-label>
-            <mat-select>
-              <mat-option value="Minecraft">Minecraft</mat-option>
-              <mat-option value="YouTube">YouTube</mat-option>
-              <mat-option value="Discord">Discord</mat-option>
-              <mat-option value="Steam">Steam</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="account-details">
-          <p>444</p>
-          <p>Minecon 2015</p>
+  <mat-card class="user-card" *ngFor="let profile of profiles">
+    <mat-card-header>
+      <div mat-card-avatar class="profile-pic"></div>
+      <mat-card-title>{{ profile.username }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="profile-info">
+        <p>{{ profile.bio }}</p>
+        <p class="join-date">{{ formatDate(profile.joinDate) }}</p>
+      </div>
+      <mat-form-field appearance="fill" class="platform-select">
+        <mat-label>Accounts</mat-label>
+        <mat-select (selectionChange)="onPlatformChange(profile, $event.value)">
+          <mat-option value="Minecraft">Minecraft</mat-option>
+          <mat-option value="YouTube">YouTube</mat-option>
+          <mat-option value="Discord">Discord</mat-option>
+          <mat-option value="Steam">Steam</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="selectedPlatform[profile.id] === 'YouTube'" class="youtube-accounts">
+        <div *ngFor="let account of youtubeAccounts[profile.id]" class="youtube-account">
+          <p>{{ account.username }}</p>
+          <p class="followers">{{ account.followers }} followers</p>
         </div>
-        <div class="account-details">
-          <p>username</p>
-          <p>Translator</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

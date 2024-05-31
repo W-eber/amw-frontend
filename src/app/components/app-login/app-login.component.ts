@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppAuthService } from '../../service/app.auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-login',
@@ -12,7 +13,8 @@ export class AppLoginComponent implements OnInit {
   useralias = ''
 
   constructor(
-    private authService : AppAuthService
+    private authService: AppAuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,16 +26,18 @@ export class AppLoginComponent implements OnInit {
     });
   }
 
-  public login () {
-    this.authService.login()
+  public login() {
+    this.authService.login().then(() => {
+      this.router.navigate(['/home']);
+    });
   }
 
-  public logout () {
-    this.authService.logout()
+  public logout() {
+    this.authService.logout();
   }
 
-  public isAuthenticated () : boolean {
-    return this.authService.isAuthenticated()
+  public isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
 }

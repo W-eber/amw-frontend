@@ -1,8 +1,7 @@
 import { Profile } from "./profile";
 
 export class SteamAccount {
-    public id! : number
+    public id: number = 0;
     public username : string = ''
     public friendcode : string = ''
-    public profile: Profile["id"] = 0
-  }
+    public profile: Profile = new Profile();  }

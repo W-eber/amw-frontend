@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {AuthConfig, OAuthErrorEvent, OAuthService} from 'angular-oauth2-oidc';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthConfig, OAuthErrorEvent, OAuthService } from 'angular-oauth2-oidc';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,31 +16,35 @@ export class AppAuthService {
   private accessTokenSubject: BehaviorSubject<string> = new BehaviorSubject('');
   public readonly accessTokenObservable: Observable<string> = this.accessTokenSubject.asObservable();
 
-  constructor(
-    private oauthService: OAuthService,
-    private authConfig: AuthConfig
-  ) {
-    this.handleEvents(null);
-  }
-
   private _decodedAccessToken: any;
+  private _accessToken = '';
 
   get decodedAccessToken() {
     return this._decodedAccessToken;
   }
 
-  private _accessToken = '';
-
   get accessToken() {
     return this._accessToken;
   }
 
+  constructor(
+    private oauthService: OAuthService,
+    private authConfig: AuthConfig,
+    private router: Router
+  ) {
+    this.handleEvents(null);
+  }
+
   async initAuth(): Promise<any> {
-    return new Promise<void>(() => {
+    return new Promise<void>((resolve) => {
       this.oauthService.configure(this.authConfig);
-      this.oauthService.events
-        .subscribe(e => this.handleEvents(e));
-      this.oauthService.loadDiscoveryDocumentAndTryLogin();
+      this.oauthService.events.subscribe(e => this.handleEvents(e));
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+        if (this.isAuthenticated()) {
+          this.router.navigate(['/home']);
+        }
+        resolve();
+      });
       this.oauthService.setupAutomaticSilentRefresh();
     });
   }
@@ -47,13 +52,15 @@ export class AppAuthService {
   public getRoles(): Observable<Array<string>> {
     if (this._decodedAccessToken !== null) {
       return new Observable<Array<string>>(observer => {
-        if (this._decodedAccessToken.resource_access.demoapp.roles) {
-          if (Array.isArray(this._decodedAccessToken.resource_access.demoapp.roles)) {
-            const resultArr = this._decodedAccessToken.resource_access.demoapp.roles.map((r: string) => r.replace('ROLE_', ''));
+        if (this._decodedAccessToken.resource_access && this._decodedAccessToken.resource_access.amw && this._decodedAccessToken.resource_access.amw.roles) {
+          if (Array.isArray(this._decodedAccessToken.resource_access.amw.roles)) {
+            const resultArr = this._decodedAccessToken.resource_access.amw.roles.map((r: string) => r.replace('ROLE_', ''));
             observer.next(resultArr);
           } else {
-            observer.next([this._decodedAccessToken.resource_access.demoapp.roles.replace('ROLE_', '')]);
+            observer.next([this._decodedAccessToken.resource_access.amw.roles.replace('ROLE_', '')]);
           }
+        } else {
+          observer.next([]);
         }
       });
     }
@@ -64,23 +71,38 @@ export class AppAuthService {
     return this.oauthService.getIdentityClaims();
   }
 
-  public isAuthenticated () {
-    return this.oauthService.hasValidAccessToken()
+  public isAuthenticated(): boolean {
+    return this.oauthService.hasValidAccessToken();
   }
 
   public logout() {
     this.oauthService.logOut();
     this.useraliasSubject.next('');
     this.usernameSubject.next('');
+    this.router.navigate(['/login']);
   }
 
-  public login() {
-    this.oauthService.initLoginFlow();
+  public login(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.oauthService.initLoginFlow();
+      this.oauthService.events.subscribe((event) => {
+        if (event.type === 'token_received') {
+          this._accessToken = this.oauthService.getAccessToken();
+          this.accessTokenSubject.next(this._accessToken);
+          this._decodedAccessToken = this.jwtHelper.decodeToken(this._accessToken);
+          this.usernameSubject.next(this._decodedAccessToken?.given_name + ' ' + this._decodedAccessToken?.family_name);
+          this.useraliasSubject.next(this.getIdentityClaims()['preferred_username']);
+          resolve();
+        } else if (event instanceof OAuthErrorEvent) {
+          reject(event);
+        }
+      });
+    });
   }
 
   private handleEvents(event: any) {
     if (event instanceof OAuthErrorEvent) {
-      // console.error(event);
+      // handle error
     } else {
       this._accessToken = this.oauthService.getAccessToken();
       this.accessTokenSubject.next(this._accessToken);
@@ -92,10 +114,8 @@ export class AppAuthService {
       }
 
       const claims = this.getIdentityClaims();
-      if (claims !== null) {
-        if (claims['preferred_username'] !== '') {
-          this.useraliasSubject.next(claims['preferred_username']);
-        }
+      if (claims !== null && claims['preferred_username']) {
+        this.useraliasSubject.next(claims['preferred_username']);
       }
     }
   }

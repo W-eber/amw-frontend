@@ -6,6 +6,7 @@ import { AppAuthGuard } from './guard/app.auth.guard';
 import { AppRoles } from './app.roles';
 import { NoAccessComponent } from './pages/no-access/no-access.component';
 import { AppLoginComponent } from './components/app-login/app-login.component';
+import { HomeUsersComponent } from './pages/home-users/home-users.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: NavBarComponent,
+    component: HomeUsersComponent,
     canActivate: [AppAuthGuard],
     data: {
       roles: [AppRoles.Read],
@@ -42,12 +43,12 @@ const routes: Routes = [
     }
   },
   {
-    path: 'add/:id',
+    path: 'edit/:id',
     pathMatch: 'full',
     component: ProfileInfoComponent,
     canActivate: [AppAuthGuard],
     data: {
-      roles: [AppRoles.Update],
+      roles: [AppRoles.Admin],
       pagetitle: 'Spiel Bearbeiten/Hinzufügen'
     }
   },

@@ -1,6 +1,6 @@
 export class Profile {
-    public id! : number
-    public username : string = ''
-    public bio : string = ''
-    public join_date: Date = new Date()
-  }
+  public id: number = 0;
+  public username: string = '';
+  public bio: string = '';
+  public joinDate: Date = new Date();
+}
