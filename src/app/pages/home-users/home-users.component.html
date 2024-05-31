@@ -1,27 +1,52 @@
 <div class="user-cards-container">
-  <mat-card class="user-card" *ngFor="let profile of profiles">
+  <mat-card class="user-card" *ngFor="let profile of profiles" (click)="navigateToProfile(profile.id)">
     <mat-card-header>
       <div mat-card-avatar class="profile-pic"></div>
       <mat-card-title>{{ profile.username }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="profile-info">
+      <div class="profile-info" (click)="$event.stopPropagation()">
         <p>{{ profile.bio }}</p>
-        <p class="join-date">{{ formatDate(profile.joinDate) }}</p>
+        <p class="join-date">Joined {{ profile.joinDate | date:'dd.MM.yyyy' }}</p>
+        <mat-form-field appearance="fill" class="platform-select">
+          <mat-label>Accounts</mat-label>
+          <mat-select (selectionChange)="onPlatformChange(profile, $event.value)">
+            <mat-option value="Minecraft">Minecraft</mat-option>
+            <mat-option value="YouTube">YouTube</mat-option>
+            <mat-option value="Discord">Discord</mat-option>
+            <mat-option value="Steam">Steam</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <mat-form-field appearance="fill" class="platform-select">
-        <mat-label>Accounts</mat-label>
-        <mat-select (selectionChange)="onPlatformChange(profile, $event.value)">
-          <mat-option value="Minecraft">Minecraft</mat-option>
-          <mat-option value="YouTube">YouTube</mat-option>
-          <mat-option value="Discord">Discord</mat-option>
-          <mat-option value="Steam">Steam</mat-option>
-        </mat-select>
-      </mat-form-field>
       <div *ngIf="selectedPlatform[profile.id] === 'YouTube'" class="youtube-accounts">
         <div *ngFor="let account of youtubeAccounts[profile.id]" class="youtube-account">
           <p>{{ account.username }}</p>
           <p class="followers">{{ account.followers }} followers</p>
+        </div>
+      </div>
+      <div *ngIf="selectedPlatform[profile.id] === 'Minecraft'" class="minecraft-accounts">
+        <div *ngFor="let account of minecraftAccounts[profile.id]" class="minecraft-account">
+          <p>{{ account.username }}</p>
+          <p class="name-changes">{{ account.nameChanges }} name changes</p>
+          <div *ngFor="let cape of capes[account.id]" class="cape">
+            <p>{{ cape.name }}</p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedPlatform[profile.id] === 'Steam'" class="steam-accounts">
+        <div *ngFor="let account of steamAccounts[profile.id]" class="steam-account">
+          <p>{{ account.username }}</p>
+          <p class="friend-code">Friend Code: {{ account.friendCode }}</p>
+          <div *ngFor="let item of items[account.id]" class="item">
+            <p>{{ item.name }}</p>
+            <p class="price">${{ item.price }}</p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedPlatform[profile.id] === 'Discord'" class="discord-accounts">
+        <div *ngFor="let account of discordAccounts[profile.id]" class="discord-account">
+          <p>{{ account.username }}</p>
+          <p class="join-date">Joined {{ account.joinDate | date:'dd.MM.yyyy' }}</p>
         </div>
       </div>
     </mat-card-content>

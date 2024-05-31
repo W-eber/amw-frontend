@@ -9,6 +9,7 @@ import { AppLoginComponent } from './components/app-login/app-login.component';
 import { HomeUsersComponent } from './pages/home-users/home-users.component';
 
 const routes: Routes = [
+  { path: 'home', redirectTo: 'home-users.component', pathMatch: 'full' },
   {
     path: 'login',
     component: AppLoginComponent,
@@ -38,7 +39,7 @@ const routes: Routes = [
     component: ProfileInfoComponent,
     canActivate: [AppAuthGuard],
     data: {
-      roles: [AppRoles.Update],
+      roles: [AppRoles.Read],
       pagetitle: 'Profil Bearbeiten'
     }
   },

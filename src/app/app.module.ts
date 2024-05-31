@@ -31,6 +31,8 @@ import { AppAuthGuard } from './guard/app.auth.guard';
 import { AppAuthService } from './service/app.auth.service';
 import { IsInRolesDirective } from './directives/is-in-roles.dir';
 import { HomeUsersComponent } from './pages/home-users/home-users.component';
+import { ProfileInfoComponent } from './pages/profile-info/profile-info.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export const authConfig: AuthConfig = {
   issuer: 'http://localhost:8080/realms/ILV',
@@ -58,7 +60,8 @@ export function storageFactory(): OAuthStorage {
     HomeUsersComponent,
     NoAccessComponent,
     AppLoginComponent,
-    IsInRolesDirective
+    IsInRolesDirective,
+    ProfileInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ export function storageFactory(): OAuthStorage {
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
     MatTableModule,
     MatIconModule,
     MatChipsModule,

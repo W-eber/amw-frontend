@@ -11,6 +11,13 @@
   max-height: 555px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .profile-pic {
@@ -27,20 +34,24 @@
 
 .profile-info {
   margin-top: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .join-date {
   color: #888;
 }
 
-.youtube-accounts {
+.youtube-accounts, .minecraft-accounts, .steam-accounts, .discord-accounts {
   margin-top: 5px;
   max-height: 200px;
   overflow-y: auto;
   padding-right: 10px;
 }
 
-.youtube-account {
+.youtube-account, .minecraft-account, .steam-account, .discord-account {
   border: 1px solid #ccc;
   padding: 5px;
   padding-left: 10px;
@@ -48,6 +59,12 @@
   border-radius: 5px;
 }
 
-.followers {
+.followers, .name-changes, .friend-code, .price {
   color: #888;
+}
+
+.cape, .item {
+  border-top: 1px solid #ddd;
+  margin-top: 5px;
+  padding-top: 5px;
 }

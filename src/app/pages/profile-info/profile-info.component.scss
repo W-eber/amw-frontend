@@ -1,0 +1,102 @@
+.profile-container {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .profile-box {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: black;
+    margin-bottom: 10px;
+  }
+  
+  .profile-username {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .profile-bio {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .add-account-btn {
+    display: flex;
+    align-items: center;
+    color: #4CAF50;
+    margin-top: 10px;
+  }
+  
+  .add-account-btn mat-icon {
+    margin-right: 5px;
+  }
+  
+  .profile-join-date {
+    margin-top: 10px;
+    color: #888;
+    font-size: 12px;
+  }
+  
+  .account-tabs {
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .account-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .account-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .sub-item-container {
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  
+  .sub-item {
+    border: 1px solid #eee;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+  }
+  
+  .details {
+    color: #888;
+  }
+  
+  .price {
+    color: #888;
+  }
+  

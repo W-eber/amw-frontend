@@ -1,1 +1,62 @@
-<p>profile-info works!</p>
+<div class="profile-container">
+    <div class="profile-box">
+      <div class="profile-header">
+        <div class="profile-pic"></div>
+        <div class="profile-username">{{ profile?.username }}</div>
+      </div>
+      <div class="profile-bio">{{ profile?.bio }}</div>
+      <button mat-button class="add-account-btn">
+        <mat-icon>add</mat-icon>
+        Add Account
+      </button>
+      <div class="profile-join-date">Joined {{ profile?.joinDate | date: 'dd.MM.yyyy' }}</div>
+    </div>
+    <div class="account-tabs">
+      <mat-tab-group (selectedIndexChange)="onTabChange($event)">
+        <mat-tab label="Minecraft">
+          <div class="account-list">
+            <div *ngFor="let account of minecraftAccounts" class="account-item">
+              <p>{{ account.username }}</p>
+              <p class="details">{{ account.nameChanges }} name changes</p>
+              <div class="sub-item-container">
+                <div *ngFor="let cape of capes[account.id]" class="sub-item">
+                  <p>{{ cape.name }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="YouTube">
+          <div class="account-list">
+            <div *ngFor="let account of youtubeAccounts" class="account-item">
+              <p>{{ account.username }}</p>
+              <p class="details">{{ account.followers }} followers</p>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Discord">
+          <div class="account-list">
+            <div *ngFor="let account of discordAccounts" class="account-item">
+              <p>{{ account.username }}</p>
+              <p class="details">Joined {{ account.joinDate | date: 'dd.MM.yyyy' }}</p>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Steam">
+          <div class="account-list">
+            <div *ngFor="let account of steamAccounts" class="account-item">
+              <p>{{ account.username }}</p>
+              <p class="details">Friend Code: {{ account.friendCode }}</p>
+              <div class="sub-item-container">
+                <div *ngFor="let item of items[account.id]" class="sub-item">
+                  <p>{{ item.name }}</p>
+                  <p class="price">${{ item.price }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  
